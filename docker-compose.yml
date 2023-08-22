@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  pg-docker:
+    image: postgres:13
+    container_name: dev-simulado-api
+    environment:
+      POSTGRES_DB: simulado-database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5444:5432"
+    volumes:
+      - ../.data/postgresql/data:/var/lib/postgresql/data
+volumes:
+  simulado_api:
