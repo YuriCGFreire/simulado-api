@@ -2,46 +2,27 @@ package com.contabilidadesimulada.simuladoapi.api.model;
 
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistrationBody {
 
-    @NotNull
-    @NotBlank
+    @NotEmpty(message = "Username canot be null")
     @Size(min = 3, max = 255)
     private String username;
 
-    @NotNull
-    @NotBlank
-    @Email
+    @Email(message = "Write a valid email")
+    @NotEmpty
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$")
-    @Size(min = 6, max = 32)
+    @NotEmpty
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$", message = "Password must contain at least six characters and one letter")
     private String password;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
