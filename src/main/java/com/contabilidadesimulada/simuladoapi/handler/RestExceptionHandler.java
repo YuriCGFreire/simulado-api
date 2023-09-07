@@ -1,9 +1,6 @@
 package com.contabilidadesimulada.simuladoapi.handler;
 
-import com.contabilidadesimulada.simuladoapi.exception.BadRequestException;
-import com.contabilidadesimulada.simuladoapi.exception.BadRequestExceptionDetails;
-import com.contabilidadesimulada.simuladoapi.exception.ExceptionDetails;
-import com.contabilidadesimulada.simuladoapi.exception.ValidationExceptionDetails;
+import com.contabilidadesimulada.simuladoapi.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -34,6 +31,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                         .details(badRequestException.getMessage())
                         .developerMessage(badRequestException.getClass().getName())
                         .build(), HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<UnauthorizedExceptionDetails> handleUnauthorizedException(UnauthorizedException unauthorizedException){
+        return new ResponseEntity<>(
+                UnauthorizedExceptionDetails.builder()
+                        .timestamp(LocalDateTime.now())
+                        .status(HttpStatus.UNAUTHORIZED.value())
+                        .title("Verifique os campos de login")
+                        .details(unauthorizedException.getMessage())
+                        .developerMessage(unauthorizedException.getClass().getName())
+                        .build(), HttpStatus.UNAUTHORIZED
         );
     }
 

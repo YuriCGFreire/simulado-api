@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegistrationBody {
 
-    @NotEmpty(message = "Username canot be null")
+    @NotEmpty(message = "Username cannot be null")
     @Size(min = 3, max = 255)
     private String username;
 

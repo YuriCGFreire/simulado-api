@@ -24,4 +24,8 @@ public class EncryptionService {
         return BCrypt.hashpw(password, salt);
     }
 
+    public boolean veriFyPassword(String password, String hash){
+        return BCrypt.checkpw(password, hash);
+    }
+
 }
